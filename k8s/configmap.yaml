@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logistics-config
+data:
+  SPRING_PROFILES_ACTIVE: "prod"
+  SERVER_PORT: "8080"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-service:5432/logistics"
+  SPRING_REDIS_HOST: "redis-service"
+  SPRING_REDIS_PORT: "6379"
+  LOGGING_LEVEL_ROOT: "INFO"
+  LOGGING_LEVEL_COM_LOGISTICS: "DEBUG"
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,info,metrics"
+  SPRING_JPA_HIBERNATE_DDL_AUTO: "validate"
+  application.properties: |
+    spring.application.name=logistics-service
+    server.port=8080
+    
+    # Database Configuration
+    spring.datasource.url=jdbc:postgresql://postgres-service:5432/logistics
+    spring.datasource.username=${DB_USERNAME}
+    spring.datasource.password=${DB_PASSWORD}
+    
+    # Redis Configuration
+    spring.redis.host=redis-service
+    spring.redis.port=6379
+    
+    # Logging Configuration
+    logging.level.com.logistics=INFO
+    logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+    
+    # Cache Configuration
+    spring.cache.type=caffeine
+    spring.cache.caffeine.spec=maximumSize=500,expireAfterWrite=600s
+    
+    # Actuator Configuration
+    management.endpoints.web.exposure.include=health,info,metrics
+    management.endpoint.health.show-details=always 
