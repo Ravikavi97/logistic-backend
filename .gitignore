@@ -1,0 +1,54 @@
+# Ignore build output directory
+/target/
+
+# Ignore Maven specific files
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Ignore generated sources
+/target/generated-sources/
+/target/maven-status/
+/target/maven-archiver/
+
+# Ignore IDE files
+/.idea/
+/*.iml
+/.classpath
+/.project
+/.settings/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore logs
+*.log
+
+# Ignore compiled class files
+*.class
+
+# Ignore jar files in target (build artifacts)
+/target/*.jar
+/target/*.jar.original
+
+# Ignore Eclipse files
+*.launch
+
+# Ignore IntelliJ files
+out/
+
+# Ignore NetBeans files
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Ignore VSCode settings
+.vscode/
