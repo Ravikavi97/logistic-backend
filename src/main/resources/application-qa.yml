@@ -1,0 +1,52 @@
+# QA Environment Configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:logistics_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 120000
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+          provider: org.ehcache.jsr107.EhcacheCachingProvider
+          missing_cache_strategy: create
+    jdbc:
+      batch_size: 50
+      fetch_size: 200
+  
+  # Redis configuration for QA
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000
+      client-type: lettuce
+      connect-timeout: 2000
+      repositories:
+        enabled: false
+  
+  cache:
+    type: redis
+
+logging:
+  level:
+    root: INFO
+    com.logistics: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.orm.jdbc.bind: INFO
+    # Remove duplicate com.logistics entry since it's already defined above
