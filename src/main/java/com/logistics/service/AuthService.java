@@ -5,6 +5,8 @@ import com.logistics.dto.LoginResponse;
 import com.logistics.entity.User;
 import com.logistics.repository.UserRepository;
 import com.logistics.security.JwtTokenProvider;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.spi.LoggerContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
+@Slf4j
 @Service
 public class AuthService {
 
@@ -59,6 +63,7 @@ public class AuthService {
     @Transactional(readOnly = true)
     public User getCurrentUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
         return userRepository.findByEmail(email)
             .orElseThrow(() -> new RuntimeException("Current user not found"));
     }

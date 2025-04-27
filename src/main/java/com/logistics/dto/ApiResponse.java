@@ -2,6 +2,7 @@ package com.logistics.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.logistics.util.RequestContext;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,7 @@ public class ApiResponse<T> {
         this.status = new ResponseStatus();
         this.metadata = new ResponseMetadata();
         this.metadata.setTimestamp(LocalDateTime.now());
+        this.metadata.setRequestId(RequestContext.getRequestId());
     }
 
     public static <T> ApiResponse<T> success(T data) {
@@ -105,4 +107,4 @@ public class ApiResponse<T> {
         this.metadata.setRequestId(requestId);
         return this;
     }
-} 
+}
